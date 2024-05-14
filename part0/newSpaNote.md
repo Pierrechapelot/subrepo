@@ -10,4 +10,5 @@ sequenceDiagram
     deactivate server
 
     Note right of browser: The browser executes the even handler that renders the notes to display
+    
     ```
