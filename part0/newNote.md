@@ -5,6 +5,9 @@ sequenceDiagram
 
     browser->>server: POST https://studies.cs.helsinki.fi/exampleapp/new_note
     activate server 
+
+    Note right of browser : Data submitted in the network tab note: test
+    
     server->>browser: HTTP GET request to /notes
     deactivate server 
 
