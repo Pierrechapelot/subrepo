@@ -11,12 +11,9 @@ const refresh = () => {
 )
 }
 
-refresh();
-counter += 1;
-console.log('counter2', counter)
-refresh();
-counter += 1;
-console.log('counter3', counter )
-refresh();
+setInterval(() => {
+    refresh();
+    counter += 1;
+}, 1000)
 
 
