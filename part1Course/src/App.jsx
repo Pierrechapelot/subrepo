@@ -1,8 +1,24 @@
-const App = (props) => {
-  const {counter} = props;
+import { useState } from 'react'
+
+const App = () => {
+  const [ counter, setCounter ] = useState(0)
+
+
+  // const handleClick = () => {
+  //   console.log('clicked')
+  // }
+
   return (
-    <div>{counter}</div>
+    <div>
+      <div>{counter}</div>
+
+      <button onClick= {() => setCounter(counter + 1)}>
+        plus
+      </button>
+      <button onClick = {() => setCounter(0)}>
+      start again
+      </button>
+    </div>
   )
 }
-
 export default App
