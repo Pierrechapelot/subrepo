@@ -12,10 +12,22 @@ const Button = ({onClick, text}) => {
   )
 };
 
-const Statistics = ({state, counter}) => {
+const Statistic = ({text, value}) => {
   return (
     <div>
-      <p>{state} {counter}</p>
+      <p>{text} {value}</p>
+    </div>
+  )
+}
+
+
+
+const Statistics = ({clicks}) => {
+  return (
+    <div>
+      <Statistic text='Good' value = {clicks.good} />
+      <Statistic text='Neutral' value = {clicks.neutral}/>
+      <Statistic text='Bad' value = {clicks.bad}/>
     </div>
   )
 
@@ -23,15 +35,13 @@ const Statistics = ({state, counter}) => {
 
 
 const App = () => {
-  // enregistrer les clics de chaque bouton dans un état différent
-  const [good, setGood] = useState(0)
-  const [neutral, setNeutral] = useState(0)
-  const [bad, setBad] = useState(0)
+
+  const [clicks, setClicks] = useState({good:0, neutral:0, bad:0})
 
 
-  const handleGoodClick = () => setGood(good + 1); console.log({good})
-  const handleNeutralClick = () => setNeutral(neutral +1); console.log({neutral})
-  const handleBadClick = () => setBad(bad +1); console.log({bad})
+  const handleGoodClick = () => setClicks({...clicks, good: clicks.good +1}); 
+  const handleNeutralClick = () => setClicks({...clicks, neutral : clicks.neutral +1}); 
+  const handleBadClick = () => setClicks({...clicks, bad: clicks.bad +1}); 
   
   
   return (
@@ -41,9 +51,8 @@ const App = () => {
       <Button onClick={handleNeutralClick} text ='Neutral'/>
       <Button onClick={handleBadClick} text ='Bad'/>
       <Header name = 'Statistics'/>
-      <Statistics state = 'Good' counter={good}/>
-      <Statistics state = 'Neutral' counter={neutral}/>
-      <Statistics state = 'Bad' counter={bad}/>
+      <Statistics clicks={clicks}/>
+
     </div>
   )
 };
