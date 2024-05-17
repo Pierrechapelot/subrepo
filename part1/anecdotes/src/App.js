@@ -1,5 +1,11 @@
 import { useState } from 'react'
 
+const Header = (props) => {
+  return (
+    <h1>{props.text}</h1>
+  )
+}
+
 const Button =({onClick, text}) => {
   return (
     <button onClick = {onClick}>{text}</button>
@@ -42,12 +48,14 @@ const App = () => {
 
   return (
     <div>
+    <Header text = 'Anecdote of the day'/>
     <Anecdote text ={anecdotes[selected]} voteCounts={allVotes[selected]}/>
  
     <div>
     <Button onClick={handleVoteClick} text='Vote'/>
     <Button onClick={handleNextClick} text='Next Anecdote'/>
     </div>
+    <Header text= 'Anecdote with most votes'/>
     </div>
   )
 }
