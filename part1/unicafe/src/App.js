@@ -23,11 +23,22 @@ const Statistic = ({text, value}) => {
 
 
 const Statistics = ({clicks}) => {
+
+  const total = clicks.good + clicks.neutral + clicks.bad;
+  const score = clicks.good - clicks.bad;
+  const average = score/total;
+  const positive = clicks.good/total*100;
+
+  
+
   return (
     <div>
       <Statistic text='Good' value = {clicks.good} />
       <Statistic text='Neutral' value = {clicks.neutral}/>
       <Statistic text='Bad' value = {clicks.bad}/>
+      <Statistic text='Total' value ={total}/>
+      <Statistic text='Average' value={average}/>
+      <Statistic text='Positive' value ={positive + ' %'}/>
     </div>
   )
 
