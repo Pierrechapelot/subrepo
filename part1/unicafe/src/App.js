@@ -14,7 +14,8 @@ const Button = ({onClick, text}) => {
 
 const StatisticLine = ({text, value}) => {
   return (
-      <tr><td>{text} {value}</td></tr>
+      <tr><td>{text}</td>
+      <td>{value}</td></tr>
   )
 }
 
