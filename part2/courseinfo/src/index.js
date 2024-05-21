@@ -52,12 +52,12 @@ const courses = [
     parts: [
       {
         name: 'Miro',
-        exercises: 3,
+        exercises: 1,
         id: 1
       },
       {
         name: 'Jira',
-        exercises: 7,
+        exercises: 4,
         id: 2
       }
     ]
