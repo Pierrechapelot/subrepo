@@ -48,7 +48,7 @@ const courses = [
   },
   {
     name: 'React Native',
-    id: 2,
+    id: 3,
     parts: [
       {
         name: 'Miro',
