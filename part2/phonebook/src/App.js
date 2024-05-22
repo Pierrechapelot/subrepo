@@ -1,5 +1,4 @@
 import { useState } from 'react'
-// import Person from './components/Person'
 import Content from './components/Content'
 import PersonForm from './components/PersonForm'
 
@@ -8,6 +7,7 @@ const App = () => {
 
   const [persons, setPersons] = useState([]) 
   const [newName, setNewName] = useState('')
+  // const [showAllPersons, setShowAllPersons] = useState(true)
 
   console.log('persons :', persons)
   const addPerson = (event) => {
@@ -16,14 +16,24 @@ const App = () => {
     const personObject = {
       name: newName
     }
+  const existingName = persons.find((person) => person.name)
+  if (existingName) {window.alert(`${newName} is already added to phonebook` )
+
+  } else {
+ 
     setPersons(persons.concat(personObject));
+  }
     // console.log('personObject', personObject);
 
   }
 
+  // const notesToShow = showAll ? notes : notes.filter(note => note.important === true)
+
   const handleNameChange = (event) => {
     setNewName(event.target.value)
   }
+
+  // const personsToShow = ;
 
   return (
     <div>
