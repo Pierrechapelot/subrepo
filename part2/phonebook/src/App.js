@@ -55,14 +55,9 @@ const App = () => {
     console.log('filter on :', event.target.value)
     setNewFilter(event.target.value)
     console.log('newFilter', newFilter)
-    const regex = new RegExp( newFilter, 'i' );
-    const filteredPersons = persons.filter((person) => person.name.match(regex))
-    setPersons(filteredPersons)
-    
-    console.log('filteredpersons', filteredPersons)
+  
+
   }
-
-
 
   return (
     <div>
@@ -71,7 +66,7 @@ const App = () => {
       <Header text='Add a new'/>
       <PersonForm onSubmit = {addPerson} newName={newName} handleNameChange = {handleNameChange} newNumber={newNumber} handleNumberChange={handleNumberChange} />
       <Header text ='Numbers'/>
-      <Content persons={persons} />
+      <Content persons={persons.filter((person) => person.name.match(new RegExp( newFilter, 'i' )))} />
     </div>
   )
 }
