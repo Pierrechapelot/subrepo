@@ -10,11 +10,11 @@ const Country = ({ country }) => {
         <ul> {Object.values(country.languages).map((language) =>
       <li key={language}>{language}</li>)}
       </ul>
-      <img src={country.flags.svg} alt="Country flag"></img>
+      <img src={country.flags.png} alt="Country flag"></img>
     </div>
   );
 };
 
 export default Country
 
-{/* country ? country.name.common : ""} */}
+

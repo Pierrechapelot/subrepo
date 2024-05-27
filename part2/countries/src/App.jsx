@@ -5,8 +5,8 @@ import Filter from './components/Filter'
 
 function App() {
 
-  const [countries, setCountries] = useState([]);
-  const [allCountries, setAllCountries] = useState([]);
+  const [countries, setCountries] = useState([]); // Countries à afficher
+  const [allCountries, setAllCountries] = useState([]); // Tous les countries
   const [newFilter, setNewFilter] = useState('');
 
 
@@ -26,7 +26,7 @@ function App() {
   
   const handleFilterChange = (event) => {
     setNewFilter(event.target.value)
-    console.log('newfilter',event.target.value)
+    // console.log('newfilter',event.target.value)
       const regex = new RegExp(event.target.value, 'i')
       const filteredCountries = allCountries.filter(country =>
         country.name.common.match(regex))
@@ -39,7 +39,7 @@ function App() {
   return (
     <div>
       <Filter value={newFilter} onChange={handleFilterChange} />
-      <Content countries={countries}/>
+      <Content countries={countries} setCountries={setCountries}/>
     </div>)
 
 }
