@@ -12,6 +12,7 @@ function App() {
 
   useEffect(() => {
     console.log('effect working')
+    
     axios
     .get('https://restcountries.com/v3.1/all')
     .then(response => 
@@ -22,6 +23,8 @@ function App() {
       })
   }, [])
   console.log('render', allCountries.length, 'countries')
+
+
 
   
   const handleFilterChange = (event) => {
