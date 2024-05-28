@@ -21,9 +21,9 @@ const App = () => {
 
   console.log("render", persons.length, "persons");
 
-  const addPerson = (event) => {
+  const addPerson = (event, id) => {
     event.preventDefault();
-    // console.log('button clicked')
+
 
     const personObject = {
       name: newName,
@@ -31,14 +31,34 @@ const App = () => {
       id: persons.length + "1",
     };
 
-    const existingName = persons.find(
-      (person) => person.name === personObject.name
-    );
-    // console.log('existingname',existingName)
-    if (existingName) {
-      window.alert(`${newName} is already added to phonebook`);
+
+    const existingPerson = persons.find(
+      (person) => person.name === personObject.name);
+
+    const updatedPerson = {...existingPerson, number: newNumber}
+
+
+    if (existingPerson) {
+      if (
+      window.confirm(`${newName} is already added to phonebook, replace the old number with a new one ?`))
+      {
+        personService
+        .update(updatedPerson.id, updatedPerson)
+        .then((returnedPerson) => {
+          console.log(`${returnedPerson.name} successfully updated`)
+          console.log('returnedPerson', returnedPerson)
+          console.log('updatedPerson', updatedPerson)
+          const personWithoutExisting = persons.filter(person => person.name !== existingPerson.name)
+          // setPersons(persons.map((person) => (person.id !== id ? person : returnedPerson)))
+          // setPersons(persons.concat(updatedPerson))
+          // setPersons(personWithoutExisting.concat(updatedPerson))
+          setPersons([...personWithoutExisting, updatedPerson])
+
+        })
+      }
     } else {
       personService.create(personObject).then((returnedPerson) => {
+
         setPersons(persons.concat(returnedPerson));
       });
     }
@@ -86,7 +106,7 @@ const App = () => {
       />
       <Header text="Numbers" />
       <Content
-        persons={persons.filter((person) =>
+        persons={persons.sort((a, b) =>a.name.localeCompare(b.name)).filter((person) =>
           person.name.match(new RegExp(newFilter, "i"))
         )}
         handleDelete={handleDelete}
