@@ -28,7 +28,7 @@ console.log(params)
         console.log('weather response', response.data)
       }
      )
-  }, [])
+  }, [country])
 
 
   return (
@@ -43,7 +43,8 @@ console.log(params)
       </ul>
       <img src={country.flags.png} alt="Country flag"></img>
       <h2>Weather in {country.capital}</h2>
-      <p>Temperature : {weather.main.temp ? weather.main.temp : ''} °F</p>
+
+      {weather && weather.main && <p>Temperature : {weather.main.temp} °F</p>}
     </div>
   );
 };
