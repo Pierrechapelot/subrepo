@@ -12,7 +12,7 @@ const App = () => {
   const [newName, setNewName] = useState("");
   const [newNumber, setNewNumber] = useState("");
   const [newFilter, setNewFilter] = useState("");
-  const [newSuccess, setNewSuccess] = useState("");
+  const [newSuccess, setNewSuccess] = useState(null);
 
   useEffect(() => {
     console.log("effect working");
@@ -47,9 +47,9 @@ const App = () => {
         personService
           .update(updatedPerson.id, updatedPerson)
           .then((returnedPerson) => {
-            console.log(`${returnedPerson.name} successfully updated`);
-            console.log("returnedPerson", returnedPerson);
-            console.log("updatedPerson", updatedPerson);
+            // console.log(`${returnedPerson.name} successfully updated`);
+            // console.log("returnedPerson", returnedPerson);
+            // console.log("updatedPerson", updatedPerson);
             const personWithoutExisting = persons.filter(
               (person) => person.name !== existingPerson.name
             );
@@ -62,6 +62,10 @@ const App = () => {
     } else {
       personService.create(personObject).then((returnedPerson) => {
         setPersons(persons.concat(returnedPerson));
+        setNewSuccess(`${returnedPerson.name} has been correctly added to your collection`)
+        setTimeout(() => {
+          setNewSuccess(null)
+        }, 5000)
       });
     }
     // console.log('personObject', personObject);
