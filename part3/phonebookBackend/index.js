@@ -57,7 +57,7 @@ app.get("/info", (request, response) => {
   const entries = persons.length;
   const currentTime = new Date().toLocaleString();
   const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-
+  Person.find({}).then(persons => {
   response.send(
     `
     <div>
@@ -68,6 +68,7 @@ app.get("/info", (request, response) => {
       </p>
     </div>`
   );
+})
 });
 
 app.get("/api/persons/:id", (request, response, next) => {
