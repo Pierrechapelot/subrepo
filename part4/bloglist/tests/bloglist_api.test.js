@@ -57,7 +57,6 @@ test('blogs are returned as json', async () => {
       await api
         .post('/api/blogs')
         .send(newBlog)
-        .set(headers)
         .expect(400)
         const blogsAtEnd = await helper.blogsInDb()
 
@@ -74,7 +73,6 @@ test('blogs are returned as json', async () => {
         await api
           .post('/api/blogs')
           .send(newBlog)
-          .set(headers)
           .expect(200)
           .expect('Content-Type', /application\/json/)
     
