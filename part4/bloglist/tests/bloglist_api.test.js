@@ -35,7 +35,7 @@ test('blogs are returned as json', async () => {
       title:"Canonical string reduction",
       author:"Edsger W. Dijkstra",
       url:"http://www.cs.utexas.edu/~EWD/transcriptions/EWD08xx/EWD808.html",
-      likes:12,
+      likes:14,
     }
 
     await api
@@ -47,3 +47,39 @@ test('blogs are returned as json', async () => {
     const blogsAtEnd = await helper.blogsInDb()
     expect(blogsAtEnd).toHaveLength(helper.initialBlogs.length + 1)})
 
+
+    test('If title and url are missing, respond with 400 bad request', async () => {
+      const newBlog = {
+        author:"Edsger W. Dijkstra",
+        likes:12
+      }
+  
+      await api
+        .post('/api/blogs')
+        .send(newBlog)
+        .set(headers)
+        .expect(400)
+        const blogsAtEnd = await helper.blogsInDb()
+
+        expect(blogsAtEnd).toHaveLength(helper.initialBlogs.length)
+      })
+
+      test('If the likes property is missing, it will default to 0 ', async () => {
+        const newBlog = {
+          title:"First class tests",
+          author:"Robert C. Martin",
+          url:"http://blog.cleancoder.com/uncle-bob/2017/05/05/TestDefinitions.htmll",
+        }
+    
+        await api
+          .post('/api/blogs')
+          .send(newBlog)
+          .set(headers)
+          .expect(200)
+          .expect('Content-Type', /application\/json/)
+    
+        const blogsAtEnd = await helper.blogsInDb()
+        const addedBlog = await blogsAtEnd.find(blog => blog.title === "First class tests")
+        expect(addedBlog.likes).toBe(0)
+      })
+    
