@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Note from './components/Note'
 import Notification from './components/Notification'
 import Footer from './components/Footer'
@@ -53,41 +53,36 @@ const App = () => {
         }, 5000)
       })
   }
+  const handleLogin = async (event) => {
+    event.preventDefault()
+
+    try {
+      const user = await loginService.login({
+        username, password,
+      })
+      window.localStorage.setItem(
+        'loggedNoteappUser', JSON.stringify(user)
+      ) 
+      noteService.setToken(user.token)
+      setUser(user)
+      setUsername('')
+      setPassword('')
+    } catch (exception) {
+      setErrorMessage('wrong credentials')
+      setTimeout(() => {
+        setErrorMessage(null)
+      }, 5000)
+    }
+  }
 
   const addNote = (noteObject) => {
+    noteFormRef.current.toggleVisibility()
     noteService
       .create(noteObject)
       .then(returnedNote => {
         setNotes(notes.concat(returnedNote))
       })
   }
-
-
-  // const handleNoteChange = (event) => {
-  //   setNewNote(event.target.value)
-  // }
-
-  // const handleLogin = async (event) => {
-  //   event.preventDefault()
-
-  //   try {
-  //     const user = await loginService.login({
-  //       username, password,
-  //     })
-  //     window.localStorage.setItem(
-  //       'loggedNoteappUser', JSON.stringify(user)
-  //     ) 
-  //     noteService.setToken(user.token)
-  //     setUser(user)
-  //     setUsername('')
-  //     setPassword('')
-  //   } catch (exception) {
-  //     setErrorMessage('wrong credentials')
-  //     setTimeout(() => {
-  //       setErrorMessage(null)
-  //     }, 5000)
-  //   }
-  // }
 
   const notesToShow = showAll
     ? notes
@@ -114,19 +109,15 @@ const App = () => {
         </div>
       </div>
     )
-    
-    
 }
-  
-  // const noteForm = () => (
-  //   <form onSubmit={addNote}>
-  //     <input
-  //       value={newNote}
-  //       onChange={handleNoteChange}
-  //     />
-  //     <button type="submit">save</button>
-  //   </form>  
-  // )
+
+const noteFormRef = useRef()
+
+const noteForm = () => (
+  <Togglable buttonLabel='new note' ref={noteFormRef}>
+    <NoteForm createNote={addNote} />
+  </Togglable>
+)
 
   return (
     <div>
