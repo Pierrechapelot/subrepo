@@ -28,4 +28,4 @@ const NoteForm = ({ createNote }) => {
   )
 }
 
-  export default NoteForm
+export default NoteForm
