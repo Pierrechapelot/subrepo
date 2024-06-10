@@ -7,8 +7,16 @@ test('renders content', () => {
     content: 'Component testing is done with react-testing-library',
     important: true
   }
+})
+
+test('clicking the button calls event handler once', async () => {
+  const note = {
+    content: 'Component testing is done with react-testing-library',
+    important: true
+  }
 
   const mockHandler = vi.fn()
+
   render(
     <Note note={note} toggleImportance={mockHandler} />
   )
