@@ -21,11 +21,12 @@ const Anecdotes = () => {
         const regex = new RegExp(filter, 'i')
         return anecdotes.filter(anecdote => anecdote.content.match(regex))
     })
-    const byVotes = (a, b) =>  b.votes - a.votes
+    const byVotes = (a, b) => b.votes - a.votes
     
+   
     return (
         <div>
-            {anecdotes.sort(byVotes).map(anecdote => 
+            {[...anecdotes].sort(byVotes).map(anecdote => 
                 <Anecdote
                 key={anecdote.id}
                 anecdote= {anecdote}
