@@ -14,9 +14,14 @@ const Anecdote = ({anecdote, handleClick}) => {
 const Anecdotes = () => {
 
     const dispatch = useDispatch()
-    const anecdotes = useSelector(state=>state)
+    const anecdotes = useSelector(({filter, anecdotes}) => {
+        if (filter === null) {
+            return anecdotes
+        }
+        const regex = new RegExp(filter, 'i')
+        return anecdotes.filter(anecdote => anecdote.content.match(regex))
+    })
     const byVotes = (a, b) =>  b.votes - a.votes
-
     
     return (
         <div>
