@@ -1,5 +1,5 @@
 import {createSlice} from '@reduxjs/toolkit'
-import { Component } from 'react';
+
 
 const anecdotesAtStart = [
   "If it hurts, do it more often",
@@ -36,11 +36,11 @@ const anecdoteSlice = createSlice({
     },
     addVote(state, action) {
       const id = action.payload;
- 
+ console.log(action)
       const anecdoteToChange = state.find((n) => n.id === id);
       const changedAnecdote = {
         ...anecdoteToChange,
-        votes: anecdoteToChange.votes +1
+        votes: anecdoteToChange.votes +1,
       }
 
       return state.map((anecdote) =>
