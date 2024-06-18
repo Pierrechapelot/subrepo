@@ -10,6 +10,7 @@ const Anecdote = ({anecdote}) => {
       dispatch(addVote(anecdote))
       dispatch(setNotification(`You voted for '${anecdote.content}'`, 5))
     }
+
     return (
         <div>
             {anecdote.content}
@@ -23,10 +24,14 @@ const Anecdotes = () => {
     
     const anecdotes = useSelector(({filter, anecdotes}) => {
         if (filter === null) {
+            console.log('anec', anecdotes)
             return anecdotes
         }
         const regex = new RegExp(filter, 'i')
-        return anecdotes.filter(anecdote => anecdote.content.match(regex))
+
+        const anecdotesFilter = anecdotes.filter(anecdote => anecdote.content.match(regex))
+        console.log('anecdotesFilter', anecdotesFilter)
+        return anecdotesFilter
     })
     const byVotes = (a, b) => b.votes - a.votes
     
@@ -34,12 +39,12 @@ const Anecdotes = () => {
     return (
         <div>
             {[...anecdotes].sort(byVotes).map(anecdote => 
+            <div key= {anecdote.id}>
                 <Anecdote
-                key={anecdote.id}
+                // key123={anecdote.id}
                 anecdote= {anecdote}
-                handleClick={() => 
-                    dispatch(addVote(anecdote.id))
-                }/>
+                />
+                </div>
             )}
         </div>
     )
