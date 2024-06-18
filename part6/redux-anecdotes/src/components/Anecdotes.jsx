@@ -6,6 +6,7 @@ const Anecdote = ({anecdote}) => {
     const dispatch = useDispatch()
 
     const voteHandler = () => {
+        console.log('anecdote', anecdote)
       dispatch(addVote(anecdote))
       dispatch(setNotification(`You voted for '${anecdote.content}'`, 5))
     }
@@ -19,8 +20,6 @@ const Anecdote = ({anecdote}) => {
 }
 
 const Anecdotes = () => {
-
-    const dispatch = useDispatch()
     
     const anecdotes = useSelector(({filter, anecdotes}) => {
         if (filter === null) {
