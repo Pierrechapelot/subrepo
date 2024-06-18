@@ -12,9 +12,10 @@ const NewAnecdote = (props) => {
         const content = event.target.anecdote.value
         // console.log('content', content)
         event.target.anecdote.value = ''
-        const newAnecdote = await anecdoteService.createNew(content)
-        // console.log(newAnecdote)
-        dispatch(createAnecdote(newAnecdote))
+        dispatch(createAnecdote(content))
+        // const newAnecdote = await anecdoteService.createNew(content)
+        // // console.log(newAnecdote)
+        // dispatch(createAnecdote(newAnecdote))
         dispatch(setNotification(`You created a new anecdote : ${content}`, 5))
     }
     return (
