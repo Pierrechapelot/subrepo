@@ -65,6 +65,7 @@ const CreateNew = (props) => {
 
   const handleSubmit = (event) => {
     event.preventDefault()
+    // eslint-disable-next-line react/prop-types
     props.addNew({
       content: content.value,
       author: author.value,
@@ -121,7 +122,7 @@ const App = () => {
     }
   ])
 
-  const [notification, setNotification] = useState('')
+  // const [notification, setNotification] = useState('')
 
   const addNew = (anecdote) => {
     anecdote.id = Math.round(Math.random() * 10000)
@@ -131,6 +132,7 @@ const App = () => {
   const anecdoteById = (id) =>
     anecdotes.find(a => a.id === id)
 
+  // eslint-disable-next-line no-unused-vars
   const vote = (id) => {
     const anecdote = anecdoteById(id)
 
